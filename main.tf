@@ -11,14 +11,15 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-  access_key = "ASIAQVPOG3TTGR3S2IHE"
-  secret_key = "zOLADuZNZc5PabFSccbfrO9ZBKCAWGIfD2RGmPxG"
-  token      = "FwoGZXIvYXdzEDMaDIYpa8cGWfi71w/aSyLEAUuP4Qx3iQTAycc9sZ8iPwba3ZgHK3dm/Uii8yhnYUT/zpPkqOggkSc8lse9ey1vnkFr/jlp5DsGOr8yvbQVvAIiL7ZdzfIB1+eBClPFj0ixylhrPoHYj6j61Tt1IzlQ5at7JGXmfNGFBatw5lJ4Q06BQYK0Owc0ZhCIMhQ5SEf70D69Mfli1KXCoucu2BZX8000j7Ac8j31I6Ab2J4Pvcdfv7y41d5YhtbjnqEDiezE3TNHwgfu8SFtCJt0abg7mYTj/sUopaeQnAYyLSTiIzfSPAlUoXLuL7NK0MJN0Grr/qi6udakS7WT1Cd0WsphfruHW2gYBbERNQ=="
+  access_key = "ASIAQVPOG3TTAZPZGA5U"
+  secret_key = "MhEXzg8qcvcnYq+6zG4GpvD9iKcz/hR/1fUCXEAW"
+  token      = "FwoGZXIvYXdzEPf//////////wEaDCPY6uWPHVc8tz8l2CLEAV9JcvLBrcsEPIHBIMeDrZdo7irA+kPi5NSpbmz34VChKakgA1G+e8IpRYvh/L631wIiT4TABkYqpJSn3HYttpeiDBQ56X+2OYeq3FxqV19uPHcoMFNSiinJJcXrACRm45jwPRIQYhNfa5Q3uPiOts9tRKsCVq6wYhuIv6JbBZzbfXGbGxOuyt9341D4M2/LPWfbSRL/tO90WwjkLT2RkgZ79UFETkwMkCARq3EHruB34rEK81sT23QUKyQGWIg9/H9ml8co6Zy7nAYyLUWkqTMbOUkGD4Ta0LQ9L7JCQQy+O6CUUIFuYI/7nxkTabULN3/Z4gnGhJ178A=="
 }
 
 resource "aws_security_group" "security_gp" {
   vpc_id = data.aws_vpc.default.id
 
+  # verify port
   ingress {
     from_port        = 0
     to_port          = 0
@@ -48,6 +49,6 @@ resource "aws_instance" "instance_micro" {
   user_data              = file("userdata.sh")
   count                  = 1
   tags = {
-    Name = "micro"
+    Name = "sql-10"
   }
 }
