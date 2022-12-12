@@ -82,7 +82,7 @@ resource "aws_instance" "master" {
   availability_zone      = "us-east-1c"
   user_data              = file("master.sh")
   count                  = 1
-  subnet_id = "subnet-0e56c7e46775aa919" # 172.31.16.0/20
+  subnet_id = "subnet-0e56c7e46775aa919"
   private_ip              = "172.31.17.1"
   tags = {
     Name = "sql-master"
@@ -96,7 +96,7 @@ resource "aws_instance" "slave_1" {
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
   count                  = 1
-  subnet_id = "subnet-0e56c7e46775aa919" # 172.31.16.0/20
+  subnet_id = "subnet-0e56c7e46775aa919"
   private_ip              = "172.31.17.2" 
   tags = {
     Name = "sql-slave-1"
@@ -110,7 +110,7 @@ resource "aws_instance" "slave_2" {
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
   count                  = 1
-  subnet_id = "subnet-0e56c7e46775aa919" # 172.31.16.0/20
+  subnet_id = "subnet-0e56c7e46775aa919"
   private_ip              = "172.31.17.3"
   tags = {
     Name = "sql-slave-2"
@@ -124,7 +124,7 @@ resource "aws_instance" "slave_3" {
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
   count                  = 1
-  subnet_id = "subnet-0e56c7e46775aa919" # 172.31.16.0/20
+  subnet_id = "subnet-0e56c7e46775aa919"
   private_ip              = "172.31.17.4"
   tags = {
     Name = "sql-slave-3"
