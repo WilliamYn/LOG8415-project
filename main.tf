@@ -43,6 +43,7 @@ data "aws_vpc" "default" {
   default = true
 }
 
+# Creation of standalone sql instance
 resource "aws_instance" "instance_micro" {
   ami                    = "ami-0a6b2839d44d781b2"
   instance_type          = "t2.micro"
@@ -55,26 +56,8 @@ resource "aws_instance" "instance_micro" {
   }
 }
 
-# resource "aws_security_group" "cluster_gp" {
-#   vpc_id = data.aws_vpc.default.id
 
-#   # verify port
-#   ingress {
-#     from_port        = 0
-#     to_port          = 65535
-#     protocol         = "tcp"
-#     cidr_blocks      = ["0.0.0.0/0"]
-#   }
-
-#   ingress {
-#     from_port        = 22
-#     to_port          = 22
-#     protocol         = "tcp"
-#     cidr_blocks      = ["0.0.0.0/0"]
-#   }
-# }
-
-
+# Creation of master node for cluster
 resource "aws_instance" "master" {
   ami                    = "ami-0a6b2839d44d781b2"
   instance_type          = "t2.micro"
@@ -89,6 +72,7 @@ resource "aws_instance" "master" {
   }
 }
 
+# Creation of slave nodes for cluster
 resource "aws_instance" "slave_1" {
   ami                    = "ami-0a6b2839d44d781b2"
   instance_type          = "t2.micro"
@@ -129,4 +113,17 @@ resource "aws_instance" "slave_3" {
   tags = {
     Name = "sql-slave-3"
   }
+}
+
+# Creation of proxy node
+resource "aws_instance" "proxy" {
+    ami                    = "ami-0a6b2839d44d781b2"
+    instance_type          = "t2.micro"
+    vpc_security_group_ids = [aws_security_group.security_gp.id]
+    availability_zone      = "us-east-1c"
+    subnet_id = "subnet-0e56c7e46775aa919"
+    private_ip              = "172.31.17.5"
+    tags = {
+      Name = "proxy"
+    }
 }
