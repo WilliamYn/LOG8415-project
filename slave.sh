@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "HELLOOOOOO"
 sudo apt-get update
 sudo apt-get -y install libclass-methodmaker-perl git dos2unix expect libaio1 libmecab2
@@ -11,7 +12,7 @@ sudo dpkg -i mysql-cluster-community-data-node_7.6.6-1ubuntu18.04_amd64.deb
 # Create my.cnf:
 sudo touch my.cnf
 echo -e -E "[mysql_cluster]
-ndb-connectstring=1172.31.17.1  # Master server" | sudo tee my.cnf
+ndb-connectstring=ip-172-31-17-1.ec2.internal  # Master server" | sudo tee my.cnf
 sudo dos2unix my.cnf
 sudo cp my.cnf /etc/
 
