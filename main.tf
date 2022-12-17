@@ -118,7 +118,7 @@ resource "aws_instance" "slave_3" {
 # Creation of proxy node
 resource "aws_instance" "proxy" {
     ami                    = "ami-0a6b2839d44d781b2"
-    instance_type          = "t2.micro"
+    instance_type          = "t2.large"
     vpc_security_group_ids = [aws_security_group.security_gp.id]
     availability_zone      = "us-east-1c"
     subnet_id = "subnet-0e56c7e46775aa919"
