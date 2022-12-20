@@ -1,7 +1,6 @@
 #!/bin/bash
-echo "HELLOOOOOO"
 sudo apt-get update
-sudo apt-get -y install libclass-methodmaker-perl git dos2unix expect libaio1 libmecab2
+sudo apt-get -y install libaio1 libmecab2 libclass-methodmaker-perl dos2unix
 
 sudo mkdir project
 cd project
