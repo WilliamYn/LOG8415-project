@@ -11,15 +11,14 @@ terraform {
 
 provider "aws" {
   region     = "us-east-1"
-  access_key = "ASIAQVPOG3TTIW6AFJDW"
-  secret_key = "oj+0/enIDyR9O8Z588FqOZ2dwOK05rmn6zVurv/s"
-  token      = "FwoGZXIvYXdzEJX//////////wEaDPpTOCtvuZnR1VjjACLEAScJTZc31KRX9TUmIP13orpk0wTyJxabbtDHqgr+yDskh6mBAarwAVWIn0zKh5pKQX6SQoQTRQ0H59cCBCak8tBbSx25THwIvuUo+wWOVxlQj+qvJPmNyP3feY5VViEMSBR4Ir0RGbiOM/sa6EAz5k/hFx3fpyvBHYa7xmpyH9OuiLLVDy3CguvpiFQaxnbMTsF2Pkl4eS/onmgMld5CDQdlkPIEIO3dTXLivY6rCgGPN+9VzH6zavb/PlNPWHKaMu3zoi8ohIfenAYyLe07SwaekZ1RWrQ/rjhoLelHhw6C8b3bq0nyg0zKOAzEipjcha4yQGZVrD/idA=="
+  access_key = "ASIAQVPOG3TTJU3QMT7E"
+  secret_key = "4Q1W+lxfYv8LSJL7lUVXgkjIok/lgexG2/6M9YDm"
+  token      = "FwoGZXIvYXdzEEYaDHS7E7Z/13LZKh1McSLEARQ8B5Y3ziMxh7yFge3Mszjqf0H53ZxEArHqPx1XWUAReJJ27kveq3LlCFBzYtC9YfPzztjyDQMhbNJSlZsOBRvVdnYswGxYGhEClI3ulIGMc1hU2TIOn3VKwXZxh1QZ9CaAjYEOXgiFne1m0xIOrFb8qrDb/93X8jKiHdAGjYIeHXcmgLlK2CJp+AkTcvugXH4pn9qj48OnvhZZvnYHvrE+eUDB0gBnhTcdCjk/f/4OHBMZUvbEPLGot9zMxh1X6nbSCCoo2vOEnQYyLWN7czZ+A/x/xjsf35wNt6tp9G0ZG0Vb8qFc6Xmlx1LkHIemOKjiLzpJvnZXBA=="
 }
 
 resource "aws_security_group" "security_gp" {
   vpc_id = data.aws_vpc.default.id
 
-  # verify port
   ingress {
     from_port        = 0
     to_port          = 0

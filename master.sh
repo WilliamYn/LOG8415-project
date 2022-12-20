@@ -1,9 +1,8 @@
 #!/bin/bash
 echo "master"
 sudo apt-get update
-sudo apt-get -y install git dos2unix libaio1 libmecab2 sysbench expect libncurses5 libtinfo5
+sudo apt-get -y install libaio1 libmecab2 libncurses5 libtinfo5 dos2unix sysbench # TODO
 
-# cd ../..
 sudo mkdir project
 cd project
 
@@ -82,3 +81,22 @@ echo "enable"
 sudo systemctl enable ndb_mgmd
 echo "start"
 sudo systemctl start ndb_mgmd
+
+# Install mysql cluster and install packages from debian files
+wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
+sudo tar -xvf mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
+sudo dpkg -i mysql-common_7.6.6-1ubuntu18.04_amd64.deb
+sudo dpkg -i mysql-cluster-community-client_7.6.6-1ubuntu18.04_amd64.deb
+sudo dpkg -i mysql-client_7.6.6-1ubuntu18.04_amd64.deb
+
+# Create my.cnf file
+sudo touch my.cnf
+echo "
+[mysqld]
+ndbcluster
+bind-address=0.0.0.0
+ndb-connectstring=ip-172-31-17-1.ec2.internal
+
+[mysql_cluster]
+ndb-connectstring=ip-172-31-17-1.ec2.internal
+" | sudo tee my.cnf
