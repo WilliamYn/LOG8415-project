@@ -5,11 +5,11 @@ Commands to run
 
 Standalone:
 
-*cd ../../project
-*sudo mysql -u root
-*SOURCE ~/../../project/sakila-db/sakila-schema.sql;
-*SOURCE ~/../../project/sakila-db/sakila-data.sql;
-*exit
+*   cd ../../project
+*   sudo mysql -u root
+*   SOURCE ~/../../project/sakila-db/sakila-schema.sql;
+*   SOURCE ~/../../project/sakila-db/sakila-data.sql;
+*   exit
 
 Run benchmarks:
 
