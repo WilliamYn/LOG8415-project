@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Installations"
 sudo apt-get update
-sudo apt-get install -y mysql-server sysbench
+sudo apt-get install -y sysbench mysql-server
 
 echo "Dir creation"
 mkdir project

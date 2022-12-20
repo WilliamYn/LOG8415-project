@@ -1,16 +1,15 @@
 # LOG8415-project
 Final project for the course
 
-
 Commands to run
 
 Standalone:
 
-cd ../../project
-sudo mysql -u root
-SOURCE ~/../../project/sakila-db/sakila-schema.sql;
-SOURCE ~/../../project/sakila-db/sakila-data.sql;
-exit
+*cd ../../project
+*sudo mysql -u root
+*SOURCE ~/../../project/sakila-db/sakila-schema.sql;
+*SOURCE ~/../../project/sakila-db/sakila-data.sql;
+*exit
 
 Run benchmarks:
 
@@ -28,17 +27,6 @@ sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=s
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root prepare
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --num-threads=6 --max-time=60 --max-requests=0 run
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root cleanup
-
-
-
-// pourquoi 100000?
-
-
-Cite: https://www.digitalocean.com/community/tutorials/how-to-create-a-multi-node-mysql-cluster-on-ubuntu-18-04
-
-Read this for sysbench: https://www.jamescoyle.net/how-to/1131-benchmark-mysql-server-performance-with-sysbench 
-
-
 
 On master:
 cd ../../project
@@ -83,3 +71,6 @@ sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=s
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster prepare
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster --num-threads=6 --max-time=60 --max-requests=0 run
 sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster cleanup
+
+Reference for setup of mysql cluster: https://www.digitalocean.com/community/tutorials/how-to-create-a-multi-node-mysql-cluster-on-ubuntu-18-04
+Reference for sysbench: https://www.jamescoyle.net/how-to/1131-benchmark-mysql-server-performance-with-sysbench 
