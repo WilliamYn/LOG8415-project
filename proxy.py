@@ -2,6 +2,7 @@ import subprocess
 import random
 
 slave_ip_addresses = ["172.31.17.2", "172.31.17.3", "172.31.17.4"]
+master_ip_address = "172.31.17.1"
 
 def get_slave_from_ip(ip_address: str) -> int:
     return slave_ip_addresses.index(ip_address) + 1
@@ -38,8 +39,27 @@ def get_random_ip():
     """
     return random.choice(slave_ip_addresses)
 
-fastest_ping_ip = get_fastest_ping_ip()
-print("Fastest worker is worker", get_slave_from_ip(fastest_ping_ip), "with ip address:", fastest_ping_ip)
 
-random_ip = get_random_ip()
-print("Random worker  is worker", get_slave_from_ip(random_ip), "with ip address:", random_ip)
+def direct_hit():
+    print("Forwarding to master node with ip address:", master_ip_address)
+
+def random_hit():
+    random_ip = get_random_ip()
+    print("Forwarding to random slave", get_slave_from_ip(random_ip), "with ip address:", random_ip)
+
+def fastest_ping_hit():
+    fastest_ping_ip = get_fastest_ping_ip()
+    print("Forwarding to fastest slave", get_slave_from_ip(fastest_ping_ip), "with ip address:", fastest_ping_ip)
+
+
+
+user_choice="-1"
+while user_choice not in ["direct", "random", "custom"]:
+    user_choice = input("Write DIRECT, RANDOM or CUSTOM for the node to use:\n").lower()
+
+if(user_choice == "direct"):
+    direct_hit()
+elif user_choice == "random":
+    random_hit()
+else:
+    fastest_ping_hit()
