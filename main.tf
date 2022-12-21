@@ -11,9 +11,9 @@ terraform {
 
 provider "aws" {
   region     = "us-east-1"
-  access_key = "ASIAQVPOG3TTJU3QMT7E"
-  secret_key = "4Q1W+lxfYv8LSJL7lUVXgkjIok/lgexG2/6M9YDm"
-  token      = "FwoGZXIvYXdzEEYaDHS7E7Z/13LZKh1McSLEARQ8B5Y3ziMxh7yFge3Mszjqf0H53ZxEArHqPx1XWUAReJJ27kveq3LlCFBzYtC9YfPzztjyDQMhbNJSlZsOBRvVdnYswGxYGhEClI3ulIGMc1hU2TIOn3VKwXZxh1QZ9CaAjYEOXgiFne1m0xIOrFb8qrDb/93X8jKiHdAGjYIeHXcmgLlK2CJp+AkTcvugXH4pn9qj48OnvhZZvnYHvrE+eUDB0gBnhTcdCjk/f/4OHBMZUvbEPLGot9zMxh1X6nbSCCoo2vOEnQYyLWN7czZ+A/x/xjsf35wNt6tp9G0ZG0Vb8qFc6Xmlx1LkHIemOKjiLzpJvnZXBA=="
+  access_key = "ASIAQVPOG3TTHJQ7P4UM"
+  secret_key = "Y2BmGI5jtGQlVzFWkCbAmuxyd7Tbb9efzCxOlmzq"
+  token      = "FwoGZXIvYXdzEFoaDCDLCW4qUWbn1iO/qSLEAcTgQ8BmzDems9AeVwtsMGCBzboPK5bBzQWJk9ltKd+SebGoxjBechGhxSd/O/AZyZB1LSLywpM8HRG1jSchfS+x3xYSalXDd/Z/DxKIY224Gpyj2cg/OYk8eE5s033Sf+QfMa5Op3jpSWVT9Kqj8gGpYNA/Pv+oqqjNBdUdiIgwCAvsEzJAPAUFJuIXE8hoEabgJbEFeiH/Hhyas78c+gW976Iv4wIHdTKzT9IS8+z54wksn5fzJEydjrvDWRcOZum2yWQoxLaJnQYyLdBnOC8cOOYR8cvxifwJBhXDvKlPm5kgotbeI4ork8Y7XQ6R31zVUelYc/Z86Q=="
 }
 
 resource "aws_security_group" "security_gp" {
