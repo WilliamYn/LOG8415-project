@@ -44,8 +44,8 @@ Test sakila database:
 ### Commands to run in Master node:
 Change the PROXY_PUBLIC_IP_ADDRESS for the public IP address of the proxy
 *   sudo mysql -u root
-*   GRANT ALL ON *.* to root@'PROXY_PUBLIC_IP_ADDRESS' IDENTIFIED BY 'password';
-*   GRANT ALL ON *.* to 'user'@'PROXY_PUBLIC_IP_ADDRESS' IDENTIFIED BY 'password';
+*   GRANT ALL ON \*.\* to root@'PROXY_PUBLIC_IP_ADDRESS' IDENTIFIED BY 'password';
+*   GRANT ALL ON \*.\* to 'user'@'PROXY_PUBLIC_IP_ADDRESS' IDENTIFIED BY 'password';
 
 ### Commands to run in Proxy node:
 Get the proxy.py code from the Github and paste it here:
