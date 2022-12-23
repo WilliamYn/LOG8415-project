@@ -24,13 +24,14 @@ Install sakila:
 *   SOURCE ~/../../project/sakila-db/sakila-data.sql;
 *   exit
 
-Check if works:
+Check the management server works. Should show active(running).
 *   sudo systemctl status ndb_mgmd
 *   ndb_mgm
 *   show
 *   exit
 
-Test sakila database:
+
+Test sakila database. Should show values in store table.
 *   sudo mysql
 *   use sakila;
 *   show tables;
@@ -48,9 +49,8 @@ Change the PROXY_PUBLIC_IP_ADDRESS for the public IP address of the proxy
 *   GRANT ALL ON \*.\* to 'user'@'PROXY_PUBLIC_IP_ADDRESS' IDENTIFIED BY 'password';
 
 ### Commands to run in Proxy node:
-Get the proxy.py code from the Github and paste it here:
+Get the proxy.py code from the Github and paste it in proxy.py. Get RSA key from AWS details and paste it in vockey.pem:
 *   sudo nano proxy.py
-Get RSA key from AWS details, paste in vockey.pem
 *   sudo nano vockey.pem
 *   sudo chmod 400 vockey.pem
 *   sudo python3 proxy.py
