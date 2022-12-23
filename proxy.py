@@ -3,13 +3,17 @@ from pythonping import ping
 from sshtunnel import SSHTunnelForwarder
 import pymysql
 
-# todo public ip addresses
-# slave_ip_addresses = ["172.31.17.2", "172.31.17.3", "172.31.17.4"]
+# Inser public IP addresses of slave and master
 slave_ip_addresses = ["23.22.106.34", "34.228.41.30", "23.22.190.172"]
-# master_ip_address = "172.31.17.1"
-master_ip_address = "54.172.100.33" # TODO change public ip of master
+master_ip_address = "54.172.100.33"
+
 
 def get_slave_from_ip(ip_address: str) -> int:
+    """
+    get the number of the slave node from the ip address
+    :param ip_address:      the ip address
+    :return:                the node number
+    """
     return slave_ip_addresses.index(ip_address) + 1
 
 
@@ -30,29 +34,42 @@ def get_fastest_ping_ip() -> str:
     return fastest_ping_ip
 
 
-def get_random_ip():
+def get_random_ip() -> str:
     """
-    returns a random ip address from the list of slave ip addresses
-    :return:    str ip address
+    Returns a random ip address from the list of slave ip addresses
+    :return:    A random ip address
     """
     return random.choice(slave_ip_addresses)
 
 
 def direct_hit():
+    """
+    Forwards request to master node
+    """
     print("Forwarding to master node with ip address:", master_ip_address)
     forward_request_to_node(master_ip_address)
 
 def random_hit():
+    """
+    Forwards request to a random slave node
+    """
     random_ip = get_random_ip()
     print("Forwarding to random slave", get_slave_from_ip(random_ip), "with ip address:", random_ip)
     forward_request_to_node(random_ip)
 
 def fastest_ping_hit():
+    """
+    Forwards request to the slave node with the fastest response time
+    """
     fastest_ping_ip = get_fastest_ping_ip()
     print("Forwarding to fastest slave", get_slave_from_ip(fastest_ping_ip), "with ip address:", fastest_ping_ip)
     forward_request_to_node(fastest_ping_ip)
 
 def forward_request_to_node(node_ip: str):
+    """
+    Forwards request to the node specified and prints the result of the operation
+    :param node_ip:     The IP address of the node to forward to
+    """
     with SSHTunnelForwarder(node_ip, ssh_username="ubuntu", ssh_pkey="vockey.pem", remote_bind_address=(master_ip_address, 3306)):
         client = pymysql.connect(host=master_ip_address, user="user", password="password", db="sakila", port=3306, autocommit=True)
         print(client)
@@ -61,6 +78,9 @@ def forward_request_to_node(node_ip: str):
         print(cursor.fetchall())
         client.close()
 
+
+
+# Allow user to choose between direct, random or custom
 user_choice="-1"
 while user_choice not in ["direct", "random", "custom"]:
     user_choice = input("Write DIRECT, RANDOM or CUSTOM for the node to use:\n").lower()
@@ -71,9 +91,3 @@ elif user_choice == "random":
     random_hit()
 else:
     fastest_ping_hit()
-
-
-"""
- # TODO: change public ip address to the one in proxy
-rapport: https://support.infrasightlabs.com/troubleshooting/host-is-not-allowed-to-connect-to-this-mysql-server/#:~:text=This%20error%20occurs%20due%20to,not%20other%20IP%20address%20ranges.
-"""
