@@ -1,16 +1,15 @@
 #!/bin/bash
-echo "master"
+# Installations
 sudo apt-get update
 sudo apt-get -y install libaio1 libmecab2 libncurses5 libtinfo5 sysbench
 
+# Create project directory
 sudo mkdir project
 cd project
 
-
-sudo wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-community-management-server_7.6.6-1ubuntu18.04_amd64.deb
 # Install ndb_mgmd --> management node for MySQL cluster
+sudo wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-community-management-server_7.6.6-1ubuntu18.04_amd64.deb
 sudo dpkg -i mysql-cluster-community-management-server_7.6.6-1ubuntu18.04_amd64.deb
-
 
 # Creation of configuration file for the cluster manager
 sudo touch config.ini
@@ -58,7 +57,7 @@ NodeId=8" | sudo tee config.ini
 sudo mkdir /var/lib/mysql-cluster
 sudo cp config.ini /var/lib/mysql-cluster/
 
-# Creation of ndb_mgmd service file to start cluster management server with configuration when instance starts
+# Creation of ndb_mgmd service file to start cluster management server with configuration of config.ini when instance starts
 sudo touch ndb_mgmd.service
 echo -e -E "[Unit]
 Description=MySQL NDB Cluster Management Server
@@ -83,14 +82,14 @@ sudo systemctl enable ndb_mgmd
 echo "start"
 sudo systemctl start ndb_mgmd
 
+# Installation of dependencies
 wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
 sudo tar -xvf mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
-# Installation of dependencies
 sudo dpkg -i mysql-common_7.6.6-1ubuntu18.04_amd64.deb
 sudo dpkg -i mysql-cluster-community-client_7.6.6-1ubuntu18.04_amd64.deb
 sudo dpkg -i mysql-client_7.6.6-1ubuntu18.04_amd64.deb
 
-# Ceation of configuration file for MySQL server installation
+# Creation of configuration file for MySQL server installation
 sudo touch my.cnf
 echo "
 [mysqld]

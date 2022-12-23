@@ -1,12 +1,12 @@
 #!/bin/bash
-echo "Installations"
+# Installation of sysbench and mysql-server
 sudo apt-get update
 sudo apt-get install -y sysbench mysql-server
 
-echo "Dir creation"
+# Create project directory
 mkdir project
 cd project
 
-echo "Sakila install"
+# Install and extract sakila 
 wget https://downloads.mysql.com/docs/sakila-db.tar.gz
 tar -xvf sakila-db.tar.gz

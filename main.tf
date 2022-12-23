@@ -9,6 +9,7 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
+# Provider details. Check AWS Details AWS CLI and paste the information here. 
 provider "aws" {
   region     = "us-east-1"
   access_key = "ASIAQVPOG3TTFWOHEYHI"

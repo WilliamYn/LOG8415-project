@@ -1,11 +1,13 @@
 #!/bin/bash
+# Installations
 sudo apt-get update
 sudo apt-get -y install libaio1 libmecab2 libclass-methodmaker-perl
 
+# Create project directory
 sudo mkdir project
 cd project
 
-# Fetch debian file
+# Fetch debian file for data node of sql cluster
 sudo wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-community-data-node_7.6.6-1ubuntu18.04_amd64.deb
 # Installation of the data node for sql cluster
 sudo dpkg -i mysql-cluster-community-data-node_7.6.6-1ubuntu18.04_amd64.deb
@@ -16,10 +18,10 @@ echo -e -E "[mysql_cluster]
 ndb-connectstring=ip-172-31-17-1.ec2.internal  # IP address of master" | sudo tee my.cnf
 sudo cp my.cnf /etc/
 
-# Data directory
+# Create data directory
 sudo mkdir -p /usr/local/mysql/data
 
-# Creation of ndbd service to give start instruction
+# Creation of ndbd service to give start instruction to run ndbd (data node)
 sudo touch ndbd.service
 echo -e -E "
 [Unit]
