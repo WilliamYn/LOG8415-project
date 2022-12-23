@@ -1,5 +1,7 @@
-import subprocess
 import random
+from pythonping import ping
+from sshtunnel import SSHTunnelForwarder
+import pymysql
 
 slave_ip_addresses = ["172.31.17.2", "172.31.17.3", "172.31.17.4"]
 master_ip_address = "172.31.17.1"
@@ -16,19 +18,12 @@ def get_fastest_ping_ip() -> str:
     fastest_ping_ip = ""
     fastest_ping_time = 9999
     for ip_address in slave_ip_addresses:
-        # ping ip address once
-        ping_output = subprocess.run(["ping", "-c", "1", ip_address], capture_output=True)
-        output_list = ping_output.stdout.split()
-        for binary_element in output_list:
-            # stringify the element of the output list
-            string_element = binary_element.decode("utf-8")
-            # extract the time
-            if "time=" in string_element :
-                ping_time = float(string_element.strip("time="))
-                # get fastest time
-                if ping_time < fastest_ping_time:
-                    fastest_ping_time = ping_time
-                    fastest_ping_ip = ip_address
+        ping_time = ping(target=ip_address, count=1, timeout=2).rtt_avg_ms
+        print("Ping time:", ping_time, "ms")
+        if ping_time < fastest_ping_time:
+            fastest_ping_time = ping_time
+            fastest_ping_ip = ip_address
+
     return fastest_ping_ip
 
 
@@ -52,6 +47,16 @@ def fastest_ping_hit():
     print("Forwarding to fastest slave", get_slave_from_ip(fastest_ping_ip), "with ip address:", fastest_ping_ip)
 
 
+#TODO
+# check ubuntu
+# check user, password, db
+def forward_request_to_node(node_ip: str):
+    with SSHTunnelForwarder(node_ip, ssh_username="ubuntu", ssh_pkey="key.pem", remote_bind_address=(master_ip_address, 3306)):
+        client = pymysql.connect(host=master_ip_address, user="default", password="default", db="database", port=3306, autocommit=True)
+        print(client)
+        cursor = client.cursor()
+        cursor.execute("SELECT * FROM actor;") #TODO
+        print(cursor.fetchall())
 
 user_choice="-1"
 while user_choice not in ["direct", "random", "custom"]:
@@ -63,3 +68,21 @@ elif user_choice == "random":
     random_hit()
 else:
     fastest_ping_hit()
+
+print("pings:")
+print(ping(target=master_ip_address, count=1, timeout=2).rtt_avg_ms)
+for i in slave_ip_addresses:
+    print(ping(target=i, count=1, timeout=2).rtt_avg_ms)
+
+print("forward:")
+forward_request_to_node(slave_ip_addresses[0])
+
+
+"""
+in proxy:
+sudo nano proxy.py
+paste this code
+sudo nano key.pem
+download key.pem from aws, paste on instance
+sudo python3 proxy.py
+"""
