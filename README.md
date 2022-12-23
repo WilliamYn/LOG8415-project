@@ -11,23 +11,6 @@ Standalone:
 *   SOURCE ~/../../project/sakila-db/sakila-data.sql;
 *   exit
 
-Run benchmarks:
-
-// read
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root prepare
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root cleanup
-
-// write
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root prepare
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root cleanup
-
-// read write
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root prepare
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root cleanup
-
 Cluster setup
 On master:
 *   cd ../../project
@@ -57,29 +40,8 @@ Install sakila
 *   sudo mysql
 *   use sakila;
 *   show tables;
-*   SELECT * FROM actor;
+*   SELECT * FROM store;
 *   exit
-
-benchmarks:
-// read:
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster prepare
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_read_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster cleanup
-
-// write:
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster prepare
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_write_only --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster cleanup
-
-// read-write:
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster prepare
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster --threads=6 --time=60 --max-requests=0 run
-*   sudo sysbench oltp_read_write --table-size=100000 --db-driver=mysql --mysql-db=sakila --mysql-user=root --mysql_storage_engine=ndbcluster cleanup
-
-
-
-Reference for setup of mysql cluster: https://www.digitalocean.com/community/tutorials/how-to-create-a-multi-node-mysql-cluster-on-ubuntu-18-04
-Reference for sysbench: https://www.jamescoyle.net/how-to/1131-benchmark-mysql-server-performance-with-sysbench 
 
 
 Proxy
@@ -93,5 +55,5 @@ sudo python3 proxy.py
 
 IN MASTER:
 sudo mysql -u root
-GRANT ALL ON *.* to root@'54.196.183.165' IDENTIFIED BY 'password';
-GRANT ALL ON *.* to 'user'@'54.196.183.165' IDENTIFIED BY 'password';
+GRANT ALL ON *.* to root@'34.227.47.103' IDENTIFIED BY 'password'; #TODO change IP
+GRANT ALL ON *.* to 'user'@'34.227.47.103' IDENTIFIED BY 'password'; #TODO change IP

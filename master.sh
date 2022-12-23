@@ -42,19 +42,19 @@ datadir=/usr/local/mysql/data
 [mysqld]
 # SQL node options:
 hostname=ip-172-31-17-1.ec2.internal
-NodeId=11
+NodeId=5
 
 [mysqld]
 hostname=ip-172-31-17-2.ec2.internal
-NodeId=12
+NodeId=6
 
 [mysqld]
 hostname=ip-172-31-17-3.ec2.internal
-NodeId=13
+NodeId=7
 
 [mysqld]
 hostname=ip-172-31-17-4.ec2.internal
-NodeId=14" | sudo tee config.ini
+NodeId=8" | sudo tee config.ini
 sudo mkdir /var/lib/mysql-cluster
 sudo cp config.ini /var/lib/mysql-cluster/
 
@@ -85,7 +85,7 @@ sudo systemctl start ndb_mgmd
 
 wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
 sudo tar -xvf mysql-cluster_7.6.6-1ubuntu18.04_amd64.deb-bundle.tar
-# Installatiion of dependencies
+# Installation of dependencies
 sudo dpkg -i mysql-common_7.6.6-1ubuntu18.04_amd64.deb
 sudo dpkg -i mysql-cluster-community-client_7.6.6-1ubuntu18.04_amd64.deb
 sudo dpkg -i mysql-client_7.6.6-1ubuntu18.04_amd64.deb
