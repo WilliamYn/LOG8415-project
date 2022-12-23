@@ -16,6 +16,7 @@ provider "aws" {
   token      = "FwoGZXIvYXdzEJ3//////////wEaDN/5Sq6nmY8Uq/lfPiLEAc3WXJUrQZBoas6a0SHXDdi9cfrlH5Vq/pMhkrPZuS7SwoniNVUylAOLQSmi2XeoImPC7Tc7qWtcnUNQ5E2wqOXzHtUFQedGhE1gnNgmOQHWqmUGuIf/sJylcfttw6O/y0FyIkVak6SYQo+F9dDxtlkdH0SzxjZAtCt7ztPkJdClV2gkP/LkjiHsJ8U1MBVt5GhMJym39lPYRWKA7i6r3WvYL6dghsDVWEeD7Mi81EtfKvkkMK6k19lvM87Qo8/cSmDkAr0o3PiXnQYyLWOaFKEEHtVqCakmdWMJjqWmIRPrJp58elU/RAMQh48iqUQr2sp64cF478VjwQ=="
 }
 
+# Creation of the security group in which we will put the instances. The vpc used is the default AWS vpc. 
 resource "aws_security_group" "security_gp" {
   vpc_id = data.aws_vpc.default.id
 
@@ -36,12 +37,12 @@ resource "aws_security_group" "security_gp" {
   }
 }
 
-
-
 data "aws_vpc" "default" {
   default = true
 }
 
+# Creation of instances. All instances have vockey so they can be connected to by downloading the SSH key from AWS Details. 
+# The private_ip_addresses are within the subnet defined in subnet_id (in AWS subnets page)
 # Creation of standalone sql instance
 resource "aws_instance" "standalone" {
   ami                    = "ami-0a6b2839d44d781b2"
@@ -54,7 +55,6 @@ resource "aws_instance" "standalone" {
     Name = "sql-standalone"
   }
 }
-
 
 # Creation of master node for cluster
 resource "aws_instance" "master" {
