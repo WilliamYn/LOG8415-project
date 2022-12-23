@@ -43,7 +43,7 @@ data "aws_vpc" "default" {
 }
 
 # Creation of standalone sql instance
-resource "aws_instance" "instance_micro" {
+resource "aws_instance" "standalone" {
   ami                    = "ami-0a6b2839d44d781b2"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.security_gp.id]
