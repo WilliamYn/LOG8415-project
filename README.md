@@ -38,6 +38,8 @@ On master:
 *   sudo systemctl restart mysql
 *   sudo systemctl enable mysql
 
+# client connecte au sever
+
 Install sakila
 *   sudo wget https://downloads.mysql.com/docs/sakila-db.tar.gz
 *   sudo tar -xvf sakila-db.tar.gz
@@ -56,6 +58,7 @@ Install sakila
 *   sudo mysql
 *   use sakila;
 *   show tables;
+*   SELECT * FROM actor;
 *   exit
 
 benchmarks:

@@ -11,9 +11,9 @@ terraform {
 
 provider "aws" {
   region     = "us-east-1"
-  access_key = "ASIAQVPOG3TTHJQ7P4UM"
-  secret_key = "Y2BmGI5jtGQlVzFWkCbAmuxyd7Tbb9efzCxOlmzq"
-  token      = "FwoGZXIvYXdzEFoaDCDLCW4qUWbn1iO/qSLEAcTgQ8BmzDems9AeVwtsMGCBzboPK5bBzQWJk9ltKd+SebGoxjBechGhxSd/O/AZyZB1LSLywpM8HRG1jSchfS+x3xYSalXDd/Z/DxKIY224Gpyj2cg/OYk8eE5s033Sf+QfMa5Op3jpSWVT9Kqj8gGpYNA/Pv+oqqjNBdUdiIgwCAvsEzJAPAUFJuIXE8hoEabgJbEFeiH/Hhyas78c+gW976Iv4wIHdTKzT9IS8+z54wksn5fzJEydjrvDWRcOZum2yWQoxLaJnQYyLdBnOC8cOOYR8cvxifwJBhXDvKlPm5kgotbeI4ork8Y7XQ6R31zVUelYc/Z86Q=="
+  access_key = "ASIAQVPOG3TTNDRWE6N3"
+  secret_key = "WKPtT+IxtmMx2a+ZQX2/wttVT33zDTsgaRrnFMUE"
+  token      = "FwoGZXIvYXdzEJn//////////wEaDAY4SXsIAw+PAxH9UCLEAYHX+186mcs/LTWt5pAyM7IM6p4tvrlNWVBDYcwP3YG0aFtz/AG6i6VoaPRLByCPJa6iu35MvkPmJKAcEaY5NiAqZiduzv1t5TGOeHWjkKxb4JsZCXniNhTnfMWlrWuz2uRifJ8tkoClWGl/u2j9irz67dzovktNIkCMOQfZlRQqT9qSbWHvhXyUEv9jEiD4WyL0L58bAGR3xMAHnwCnXYvce1ggEAimu1xvK6npR3z6znNFLRReOcp+QoA16WPT3zty/REo+ZOXnQYyLYW/QP4/OjR0mrOA3OFubggENF5VGycSFjcYqYYlM+iJG94LrSPJvmZ5SZ9a+Q=="
 }
 
 resource "aws_security_group" "security_gp" {
@@ -49,7 +49,7 @@ resource "aws_instance" "instance_micro" {
   vpc_security_group_ids = [aws_security_group.security_gp.id]
   availability_zone      = "us-east-1c"
   user_data              = file("standalone.sh")
-  count                  = 1
+  key_name               = "vockey"
   tags = {
     Name = "sql-standalone"
   }
@@ -63,9 +63,9 @@ resource "aws_instance" "master" {
   vpc_security_group_ids = [aws_security_group.security_gp.id]
   availability_zone      = "us-east-1c"
   user_data              = file("master.sh")
-  count                  = 1
   subnet_id              = "subnet-0e56c7e46775aa919"
   private_ip             = "172.31.17.1"
+  key_name               = "vockey"
   tags = {
     Name = "sql-master"
   }
@@ -78,9 +78,9 @@ resource "aws_instance" "slave_1" {
   vpc_security_group_ids = [aws_security_group.security_gp.id]
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
-  count                  = 1
   subnet_id              = "subnet-0e56c7e46775aa919"
   private_ip             = "172.31.17.2" 
+  key_name               = "vockey"
   tags = {
     Name = "sql-slave-1"
   }
@@ -92,9 +92,9 @@ resource "aws_instance" "slave_2" {
   vpc_security_group_ids = [aws_security_group.security_gp.id]
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
-  count                  = 1
   subnet_id              = "subnet-0e56c7e46775aa919"
   private_ip             = "172.31.17.3"
+  key_name               = "vockey"
   tags = {
     Name = "sql-slave-2"
   }
@@ -106,9 +106,9 @@ resource "aws_instance" "slave_3" {
   vpc_security_group_ids = [aws_security_group.security_gp.id]
   availability_zone      = "us-east-1c"
   user_data              = file("slave.sh")
-  count                  = 1
   subnet_id              = "subnet-0e56c7e46775aa919"
   private_ip             = "172.31.17.4"
+  key_name               = "vockey"
   tags = {
     Name = "sql-slave-3"
   }
@@ -123,6 +123,7 @@ resource "aws_instance" "proxy" {
     user_data              = file("proxy.sh")
     subnet_id              = "subnet-0e56c7e46775aa919"
     private_ip             = "172.31.17.5"
+    key_name               = "vockey"
     tags = {
       Name = "proxy"
     }

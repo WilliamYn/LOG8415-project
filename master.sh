@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "master"
 sudo apt-get update
-sudo apt-get -y install libaio1 libmecab2 libncurses5 libtinfo5 dos2unix sysbench # TODO
+sudo apt-get -y install libaio1 libmecab2 libncurses5 libtinfo5 sysbench
 
 sudo mkdir project
 cd project
@@ -53,8 +53,7 @@ NodeId=13
 [mysqld]
 hostname=ip-172-31-17-4.ec2.internal
 NodeId=14" | sudo tee config.ini
-sudo dos2unix config.ini
-sudo mkdir /var/lib/mysql-cluster #TODO
+sudo mkdir /var/lib/mysql-cluster
 sudo cp config.ini /var/lib/mysql-cluster/
 
 # service
@@ -72,9 +71,9 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target" | sudo tee ndb_mgmd.service
-sudo dos2unix ndb_mgmd.service
 sudo cp ndb_mgmd.service /etc/systemd/system/
 
+# systemctl to run ndb_mgmd.service 
 echo "reload"
 sudo systemctl daemon-reload
 echo "enable"
